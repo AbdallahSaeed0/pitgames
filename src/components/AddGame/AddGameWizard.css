@@ -1,0 +1,157 @@
+/* ═══════════════════════════════════════════════════════════════
+   AddGameWizard — animation library
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Step slide transitions ──────────────────────────────────── */
+@keyframes wz-slide-fwd {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes wz-slide-bwd {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes wz-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.wz-step-fwd  { animation: wz-slide-fwd 0.26s cubic-bezier(0.22, 0.68, 0, 1.1) both; }
+.wz-step-bwd  { animation: wz-slide-bwd 0.26s cubic-bezier(0.22, 0.68, 0, 1.1) both; }
+.wz-fade-up   { animation: wz-fade-up   0.32s ease both; }
+
+/* ── Saving spinner ──────────────────────────────────────────── */
+@keyframes wz-spin {
+  to { transform: rotate(360deg); }
+}
+.wz-spin { animation: wz-spin 0.9s linear infinite; transform-origin: center; }
+
+/* ── Success checkmark ───────────────────────────────────────── */
+@keyframes wz-ring-draw {
+  from { stroke-dashoffset: 264; opacity: 0.2; }
+  to   { stroke-dashoffset: 0;   opacity: 1;   }
+}
+@keyframes wz-tick-draw {
+  from { stroke-dashoffset: 70; }
+  to   { stroke-dashoffset: 0;  }
+}
+@keyframes wz-icon-pop {
+  0%   { transform: scale(0.4); opacity: 0; }
+  65%  { transform: scale(1.1); }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+.wz-ring { animation: wz-ring-draw 0.55s ease forwards; stroke-dasharray: 264; stroke-dashoffset: 264; }
+.wz-tick { animation: wz-tick-draw 0.38s 0.48s ease forwards; stroke-dasharray: 70; stroke-dashoffset: 70; }
+.wz-icon { animation: wz-icon-pop  0.52s cubic-bezier(0.22, 0.68, 0, 1.35) both; }
+
+/* ── Confetti particles ──────────────────────────────────────── */
+@keyframes wz-p0 { to { transform: translate(  0px, -96px) scale(0); opacity: 0; } }
+@keyframes wz-p1 { to { transform: translate( 68px, -68px) scale(0); opacity: 0; } }
+@keyframes wz-p2 { to { transform: translate( 96px,   0px) scale(0); opacity: 0; } }
+@keyframes wz-p3 { to { transform: translate( 68px,  68px) scale(0); opacity: 0; } }
+@keyframes wz-p4 { to { transform: translate(  0px,  96px) scale(0); opacity: 0; } }
+@keyframes wz-p5 { to { transform: translate(-68px,  68px) scale(0); opacity: 0; } }
+@keyframes wz-p6 { to { transform: translate(-96px,   0px) scale(0); opacity: 0; } }
+@keyframes wz-p7 { to { transform: translate(-68px, -68px) scale(0); opacity: 0; } }
+
+.wz-p {
+  position: absolute;
+  top: calc(50% - 5px); left: calc(50% - 5px);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.wz-p-0 { animation: wz-p0 0.75s 0.28s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-1 { animation: wz-p1 0.75s 0.34s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-2 { animation: wz-p2 0.75s 0.29s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-3 { animation: wz-p3 0.75s 0.38s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-4 { animation: wz-p4 0.75s 0.31s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-5 { animation: wz-p5 0.75s 0.36s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-6 { animation: wz-p6 0.75s 0.32s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+.wz-p-7 { animation: wz-p7 0.75s 0.40s cubic-bezier(0.2, 0.6, 0.3, 1) both; }
+
+/* ── Skeleton shimmer ────────────────────────────────────────── */
+@keyframes wz-shimmer {
+  0%   { background-position: -500px 0; }
+  100% { background-position:  500px 0; }
+}
+.wz-skel {
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.03)  0%,
+    rgba(255,255,255,0.09) 50%,
+    rgba(255,255,255,0.03) 100%
+  );
+  background-size: 500px 100%;
+  animation: wz-shimmer 1.5s ease infinite;
+  border-radius: 8px;
+}
+
+/* ── Drop zone ───────────────────────────────────────────────── */
+.wz-dropzone {
+  transition: border-color 0.22s ease, background 0.22s ease, transform 0.18s ease;
+  cursor: pointer;
+}
+.wz-dropzone:hover {
+  border-color: rgba(var(--accent-rgb), 0.55) !important;
+  background: rgba(var(--accent-rgb), 0.04) !important;
+  transform: scale(1.004);
+}
+
+/* ── Search result cards ─────────────────────────────────────── */
+.wz-card {
+  transition:
+    transform      0.15s ease,
+    border-color   0.15s ease,
+    background     0.15s ease,
+    box-shadow     0.15s ease;
+  cursor: pointer;
+}
+.wz-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+}
+.wz-card:not(.wz-card--selected):hover {
+  background: rgba(255,255,255,0.055) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+/* ── Inline title edit ───────────────────────────────────────── */
+.wz-title-click {
+  cursor: text;
+  border-radius: 8px;
+  transition: background 0.15s ease;
+  padding: 8px 10px;
+  margin: -8px -10px;
+}
+.wz-title-click:hover { background: rgba(255,255,255,0.06); }
+
+/* ── Nav buttons ─────────────────────────────────────────────── */
+.wz-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.15s ease, transform 0.12s ease;
+  border: none;
+}
+.wz-nav-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.wz-nav-btn:active:not(:disabled) { transform: translateY(0); }
+.wz-nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.wz-nav-btn--primary {
+  background: var(--accent-grad, var(--accent));
+  color: var(--accent-on-fill, #fff);
+}
+.wz-nav-btn--secondary {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.85);
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+.wz-nav-btn--secondary:hover:not(:disabled) {
+  background: rgba(255,255,255,0.11);
+}
